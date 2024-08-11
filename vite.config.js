@@ -11,7 +11,7 @@ export default defineConfig(({ command }) => {
     root: 'src',
     build: {
       sourcemap: true,
-
+      base: '/goit-js-hw-10/',  
       rollupOptions: {
         input: glob.sync('./src/*.html'),
         output: {
@@ -24,7 +24,9 @@ export default defineConfig(({ command }) => {
         },
       },
       outDir: '../dist',
+      emptyOutDir: true, 
     },
     plugins: [injectHTML(), FullReload(['./src/**/**.html'])],
   };
 });
+
