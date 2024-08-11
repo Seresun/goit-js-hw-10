@@ -13,20 +13,23 @@ export default defineConfig(({ command }) => {
       sourcemap: true,
       base: '/goit-js-hw-10/',  
       rollupOptions: {
-        input: glob.sync('./src/*.html'),
+        input: {
+          main: glob.sync('./src/index.html')[0],
+          timer: glob.sync('./src/1-timer.html')[0],
+          snackbar: glob.sync('./src/2-snackbar.html')[0]
+        },
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
               return 'vendor';
             }
           },
-          entryFileNames: 'commonHelpers.js',
+          entryFileNames: 'js/[name].js',
         },
       },
       outDir: '../dist',
       emptyOutDir: true, 
     },
-    plugins: [injectHTML(), FullReload(['./src/**/**.html'])],
+    plugins: [injectHTML(), FullReload(['./src/**/*.html'])],
   };
 });
-
